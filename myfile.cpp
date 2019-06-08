@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include <limits>
 
 using std::cout;
 using std::cin;
@@ -16,15 +17,31 @@ int main()
     int  coeff_b = 0;
     int  coeff_c = 0;
     
+    std::cout << "Enter the coefficients from the range.\t"
+        << std::numeric_limits<int>::min() << '\t'
+        << std::numeric_limits<int>::max() << '\n';
+
 
     cout << "Input coefficient <A>: ";
-    cin >> coeff_a;
-    
+    while ( !(cin >> coeff_a) ){
+        (cout << "Error! Re-Input coefficient <A>: ").flush();
+        cin.clear();
+        cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
+    }
+
     cout << "Input coefficient <B>: ";
-    cin >> coeff_b;
+    while ( !(cin >> coeff_b) ){
+        (cout << "Error! Re-Input coefficient <A>: ").flush();
+        cin.clear();
+        cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
+    }
 
     cout << "Input coefficient <C>: ";
-    cin >> coeff_c;
+    while ( !(cin >> coeff_c) ){
+        (cout << "Error! Re-Input coefficient <A>: ").flush();
+        cin.clear();
+        cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
+    }
 
     auto discriminant = (coeff_b * coeff_b) - (Constans_four * coeff_a * coeff_c);
     cout << "Discrimiant: " << discriminant <<"\n";
@@ -53,6 +70,6 @@ int main()
         cout << "Discrimiant < 0\n";
     }
 
-    
+    system("pause");
     return 0;
 }
