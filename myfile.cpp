@@ -2,6 +2,8 @@
 #include <cmath>
 #include <limits>
 
+#define GENERIC_CONSTANS CONSTANTS_TWO * coeff_a
+
 using std::cout;
 using std::cin;
  
@@ -54,16 +56,16 @@ int main()
     } else if(discriminant > 0){
 
         auto x1 = (-coeff_b) + sqrt(discriminant);
-        x1 /= (CONSTANTS_TWO * coeff_a);
+        x1 /= (GENERIC_CONSTANS);
         cout << "x1: " << x1 <<"\n"; 
 
         auto x2 = (-coeff_b) - sqrt(discriminant);
-        x2 /=  (CONSTANTS_TWO * coeff_a);
+        x2 /=  (GENERIC_CONSTANS);
         cout << "x2: " << x2 <<"\n"; 
 
     } else if (discriminant == 0){
 
-        auto x = (-coeff_b)/(CONSTANTS_TWO * coeff_a);
+        auto x = (-coeff_b)/(GENERIC_CONSTANS);
         cout << "x: " << x <<"\n"; 
 
     } else {
@@ -72,6 +74,6 @@ int main()
 
     }
 
-    
+
     return 0;
 }
