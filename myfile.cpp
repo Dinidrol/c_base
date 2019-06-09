@@ -2,7 +2,6 @@
 #include <cmath>
 #include <limits>
 
-#define GENERIC_CONSTANS CONSTANTS_TWO * coeff_a
 
 using std::cout;
 using std::cin;
@@ -19,6 +18,8 @@ int main()
     int  coeff_b = 0;
     int  coeff_c = 0;
     
+    const int GENERIC_CONSTANS {CONSTANTS_TWO * coeff_a};
+
     std::cout << "Enter the coefficients from the range.\t"
         << std::numeric_limits<int>::min() << '\t'
         << std::numeric_limits<int>::max() << '\n';
