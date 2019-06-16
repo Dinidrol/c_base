@@ -1,79 +1,115 @@
 #include <iostream>
-#include <cmath>
+#include <cstring>
 #include <limits>
-
-#define GENERIC_CONSTANS CONSTANTS_TWO * coeff_a
 
 using std::cout;
 using std::cin;
- 
-enum {
-    CONSTANTS_TWO = 2, 
-    CONSTANTS_FOUR = 4, 
-};
- 
 
-int main()
-{   
-    int  coeff_a = 0;
-    int  coeff_b = 0;
-    int  coeff_c = 0;
+void toUpper(){
+    const int SIZE = 100;
+    char str[SIZE] {};
+ 
+    (cout << "Insert string:\n").flush();
+    cin.clear();
+    cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
+
+    cin.get(str, SIZE);
+
+    size_t i = 0;
+    while (str[i]) {
+        if(str[i] < 'a' || str[i] > 'z'){
+            printf("%c ", str[i++]);
+        } else {
+            printf("%c ", (char)(str[i++]-32));
+        }  
+    }
+
+}
+
+void toLower(){
+    const int SIZE = 100;
+    char str[SIZE] {};
+ 
+    (cout << "Insert string:\n").flush();
+    cin.clear();
+    cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
+
+    cin.get(str, SIZE);
+
+    size_t i = 0;
+    while (str[i]) {
+        if(str[i] < 'A' || str[i] > 'Z'){
+            printf("%c ", str[i++]);
+        } else {
+            printf("%c ", (char)(str[i++]+32));
+        }  
+    }
+}
+
+void revers(){
+    const int SIZE = 100;
+    char str[SIZE] {};
+
+    (cout << "Enter a string bro: \n").flush();
+    cin.clear();
+    cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
     
-    std::cout << "Enter the coefficients from the range.\t"
-        << std::numeric_limits<int>::min() << '\t'
-        << std::numeric_limits<int>::max() << '\n';
+    cin.get(str, SIZE);
 
+    for (int i = strlen(str) - 1; i > -1; i--)
+    {
+        cout << str[i];
+    }
+        
+}
 
-    cout << "Input coefficient <A>: ";
-    while ( !(cin >> coeff_a) ){
-        (cout << "Error! Re-Input coefficient <A>: ").flush();
-        cin.clear();
-        cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
+void toDiget(){
+    char str_input[10];
+    int size; 
+
+    do {
+        cout << "Insert string:";
+        cin >> str_input;
+        size = strlen(str_input);
+
+    } while (size > 10);
+    cout << "Number is: ";
+    for (size_t i = 0; i < size; ++i){
+        if(47 < (int)str_input[i] && (int)str_input[i] < 58){
+            cout <<" "<< str_input[i] <<" ";
+        }  
+    }  
+}
+
+int main(){
+
+    int choise = 0;
+    cout << "Calculation program: \n"
+         <<"1. Find number in string \n" 
+         <<"2. To Upper string \n"
+         <<"3. To Lower string \n"
+         <<"4. Revers string \n"
+         <<"\n";
+    cin >> choise;
+
+    switch (choise){
+    case 1:
+        toDiget();
+        break;
+    case 2:
+        toUpper();
+        break;
+    case 3:
+        toLower();
+        break;
+    case 4:
+        revers();
+        break;
+    default:
+        cout<<"Error choise!" <<"\n";
+        break;
     }
 
-    cout << "Input coefficient <B>: ";
-    while ( !(cin >> coeff_b) ){
-        (cout << "Error! Re-Input coefficient <A>: ").flush();
-        cin.clear();
-        cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
-    }
-
-
-    cout << "Input coefficient <C>: ";
-    while ( !(cin >> coeff_c) ){
-        (cout << "Error! Re-Input coefficient <A>: ").flush();
-        cin.clear();
-        cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
-    }
-
-    auto discriminant = (coeff_b * coeff_b) - (CONSTANTS_FOUR * coeff_a * coeff_c);
-    cout << "Discrimiant: " << discriminant <<"\n";
-
-    if(coeff_a == 0){
-
-        cout << "x: 0 \n";
-
-    } else if(discriminant > 0){
-
-        auto x1 = (-coeff_b) + sqrt(discriminant);
-        x1 /= (GENERIC_CONSTANS);
-        cout << "x1: " << x1 <<"\n"; 
-
-        auto x2 = (-coeff_b) - sqrt(discriminant);
-        x2 /=  (GENERIC_CONSTANS);
-        cout << "x2: " << x2 <<"\n"; 
-
-    } else if (discriminant == 0){
-
-        auto x = (-coeff_b)/(GENERIC_CONSTANS);
-        cout << "x: " << x <<"\n"; 
-
-    } else {
-
-        cout << "Discrimiant < 0\n";
-
-    }
-
-
+    system("pause");
     return 0;
 }
