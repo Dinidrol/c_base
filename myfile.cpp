@@ -26,9 +26,9 @@ void toUpper(){
 
     for(size_t i = 0; str_input[i]; ++i) {
         if(str_input[i] < 'a' && str_input[i] > 'z'){
-            cout << str_input[i++];
+            cout << str_input[i];
         } else {
-            cout << (char)(str_input[i++] - SHIFT_NUMBER);
+            cout << (char)(str_input[i] - SHIFT_NUMBER);
         }  
     }
 
@@ -46,9 +46,9 @@ void toLower(){
 
     for(size_t i = 0; str_input[i]; ++i) {
         if(str_input[i] < 'A' && str_input[i] > 'Z'){
-            cout << str_input[i++];
+            cout << str_input[i];
         } else {
-            cout << (char)(str_input[i++] - SHIFT_NUMBER);
+            cout << (char)(str_input[i] + SHIFT_NUMBER);
         }  
     }
 }
@@ -63,8 +63,9 @@ void revers(){
         size = strlen(str_input);
     } while (size > SIZE_ARR);
 
-    for (size_t i = 0; i < size/2; ++i)
-    {
+    size_t half_size_input_arr = size/2;
+
+    for (size_t i = 0; i < half_size_input_arr; ++i){
         char temp = str_input[i];
         str_input[i] = str_input[size - i - 1];
         str_input[size-i-1] = temp;
@@ -88,7 +89,7 @@ void findNumber(){
     cout << "Number is: ";
 
     for (size_t i = 0; str_input[i]; ++i){
-        if('/' < str_input[i] && str_input[i] < ':'){
+        if('0' <= str_input[i] && str_input[i] <= '9'){
             cout <<" "<< str_input[i] <<" ";
         }  
     }  
