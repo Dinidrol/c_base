@@ -5,77 +5,90 @@
 using std::cout;
 using std::cin;
 
+enum {
+    TO_LOWER = 1,
+    TO_UPPER,
+    REVERS_STR,
+    FIND_NUMBER,
+    SHIFT_NUMBER = 32, // Разность между заглавной 'A' и 'a' в таблице кодировке 
+    SIZE_ARR = 100
+};
+
 void toUpper(){
-    const int SIZE = 100;
-    char str[SIZE] {};
- 
-    (cout << "Insert string:\n").flush();
-    cin.clear();
-    cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
+    char str_input[SIZE_ARR] {};
+    size_t size;
 
-    cin.get(str, SIZE);
+    do{
+        cout << "Insert string (MAX 99 symbol) to Upper:";
+        cin >> str_input;
+        size = strlen(str_input);
+    } while (size > SIZE_ARR);
 
-    size_t i = 0;
-    while (str[i]) {
-        if(str[i] < 'a' || str[i] > 'z'){
-            printf("%c ", str[i++]);
+    for(size_t i = 0; str_input[i]; ++i) {
+        if(str_input[i] < 'a' && str_input[i] > 'z'){
+            cout << str_input[i++];
         } else {
-            printf("%c ", (char)(str[i++]-32));
+            cout << (char)(str_input[i++] - SHIFT_NUMBER);
         }  
     }
 
 }
 
 void toLower(){
-    const int SIZE = 100;
-    char str[SIZE] {};
- 
-    (cout << "Insert string:\n").flush();
-    cin.clear();
-    cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
+    char str_input[SIZE_ARR] {};
+    size_t size;
 
-    cin.get(str, SIZE);
+    do{
+        cout << "Insert string (MAX 99 symbol) to Lower:";
+        cin >> str_input;
+        size = strlen(str_input);
+    } while (size > SIZE_ARR);
 
-    size_t i = 0;
-    while (str[i]) {
-        if(str[i] < 'A' || str[i] > 'Z'){
-            printf("%c ", str[i++]);
+    for(size_t i = 0; str_input[i]; ++i) {
+        if(str_input[i] < 'A' && str_input[i] > 'Z'){
+            cout << str_input[i++];
         } else {
-            printf("%c ", (char)(str[i++]+32));
+            cout << (char)(str_input[i++] - SHIFT_NUMBER);
         }  
     }
 }
 
 void revers(){
-    const int SIZE = 100;
-    char str[SIZE] {};
+    char str_input[SIZE_ARR] {};
+    size_t size = 0; 
 
-    (cout << "Enter a string bro: \n").flush();
-    cin.clear();
-    cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
-    
-    cin.get(str, SIZE);
+    do{
+        cout << "Insert string (MAX 99 symbol) to Find Number:";
+        cin >> str_input;
+        size = strlen(str_input);
+    } while (size > SIZE_ARR);
 
-    for (int i = strlen(str) - 1; i > -1; i--)
+    for (size_t i = 0; i < size/2; ++i)
     {
-        cout << str[i];
+        char temp = str_input[i];
+        str_input[i] = str_input[size - i - 1];
+        str_input[size-i-1] = temp;
     }
+
+    cout << str_input;
         
 }
 
-void toDiget(){
-    char str_input[10];
-    int size; 
+void findNumber(){
+    char str_input[SIZE_ARR];
+    size_t size; 
 
     do {
-        cout << "Insert string:";
+        cout << "Insert string (MAX 99 symbol) to find Number on string:";
         cin >> str_input;
         size = strlen(str_input);
 
-    } while (size > 10);
+    } while (size > SIZE_ARR);
+
     cout << "Number is: ";
-    for (size_t i = 0; i < size; ++i){
-        if(47 < (int)str_input[i] && (int)str_input[i] < 58){
+
+    for (size_t i = 0; str_input[i]; ++i){
+        if('/' < str_input[i] && str_input[i] < ':'){
             cout <<" "<< str_input[i] <<" ";
         }  
     }  
@@ -85,31 +98,30 @@ int main(){
 
     int choise = 0;
     cout << "Calculation program: \n"
-         <<"1. Find number in string \n" 
+         <<"1. To Lower string \n" 
          <<"2. To Upper string \n"
-         <<"3. To Lower string \n"
-         <<"4. Revers string \n"
+         <<"3. To Revers string \n"
+         <<"4. Find number in string \n"
          <<"\n";
     cin >> choise;
 
     switch (choise){
-    case 1:
-        toDiget();
-        break;
-    case 2:
-        toUpper();
-        break;
-    case 3:
+    case TO_LOWER:
         toLower();
         break;
-    case 4:
+    case TO_UPPER:
+        toUpper();
+        break;
+    case REVERS_STR:
         revers();
+        break;
+    case FIND_NUMBER:
+        findNumber();
         break;
     default:
         cout<<"Error choise!" <<"\n";
         break;
     }
 
-    system("pause");
     return 0;
 }
