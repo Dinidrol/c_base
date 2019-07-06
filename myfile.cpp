@@ -60,7 +60,7 @@ void average (){
     unsigned input_number = 0;
     
 
-    cout << "program for calculating the average. Input only number: ";
+    cout << "Program for calculating the average. Input only number: ";
    
 
     while(!(cin >> input_number)){
@@ -110,9 +110,12 @@ void bits_summ(){
 }
 
 void happy_ticket(){
-    unsigned ticket_number;
-    unsigned high_bit;
-    unsigned low_bit;
+tryAgain:
+    unsigned ticket_number = 0;
+    unsigned high_bit = 0;
+    unsigned low_bit = 0;
+
+    size_t count_sign = 1;
 
 
     cout <<"Input ticket number:\n";
@@ -121,6 +124,15 @@ void happy_ticket(){
         (cout << "Error! Re-Input number (NUMBER UNSIGNED): ").flush();
         cin.clear();
         cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
+    }
+
+    while((ticket_number/=10) > 0){
+    	++count_sign;
+    }
+
+    if(count_sign > 6){
+    	cout << "Sign number more 6 digit!"
+    	goto tryAgain;
     }
 
     for(size_t i=0; i<3; i++){
@@ -133,7 +145,7 @@ void happy_ticket(){
         ticket_number/=10;
     }
 
-    (high_bit == low_bit)?(cout<<"You have are happy ticket!\n"):(cout<<"You have are  not happy ticket bro!\n");
+    cout << (high_bit == low_bit) ? "You have are happy ticket!\n" : "You have are  not happy ticket bro!\n";
 
 }
 
@@ -160,16 +172,16 @@ void revers_number(){
 }
 
 void odd_summ(){
-    constexpr int N = 101;
-    int mas[N]; 
-    int sum=0;
+	size_t N = 5;
+	int input_number = 0;
+    int sum = 0;
 
     cout <<"Insert 100 any integers number: \n";
 
     for (size_t i = 0; i < N; i++){
-        cin >> mas[i];  
-        if (mas[i]%2 != 0){
-            sum+=mas[i];
+        cin >> input_number;  
+        if (mas%2 != 0){
+            sum+=number;
         }
     }
     
@@ -188,7 +200,7 @@ void bit_set(){
 
     number >>= bitNum-1;
 
-    if((number > 0 ) && (number <=32)  && (number &(0x1 << bitNum-1))){
+    if( (number > 0 ) && (number <=32)  && (number &(0x1 << (bitNum-1))) ){
         cout << "Bit set in number";
     } else {
         cout <<"Bit dont set in number";
@@ -220,26 +232,17 @@ void best_div(){
 }
 
 void div_by3(){
-    constexpr int N = 5;
-    int mas[N]; 
-    int sum=0;
+	size_t N = 5;
+    int number = 0;
+    int sum = 0;
 
     cout <<"Insert number: \n";
-
-    for (int i = 0; i < N; i++){
-        cin >> mas[i];  
+    for(size_t i = 0; i < N; ++i){
+    	cin >> number;
+    	sum += number;
     }
 
-    for (int i = 0; i < N; i++){
-        sum +=mas[i];
-    }
-
-    if((sum%3) == 0){
-        cout << "Insert number div by 3";
-    } else {
-        cout << "Insert number nodt div by 3";
-    }
-
+    cout << ((sum%3) == 0) ? "Insert number div by 3" : "Insert number nodt div by 3";
 }
 
 
