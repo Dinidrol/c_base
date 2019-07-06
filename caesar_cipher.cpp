@@ -1,27 +1,28 @@
 #include <iostream>
 #include <cstring>
-using namespace std;
- 
+
+using std::cout;
+using std::cin; 
 
 int main() {
-    constexpr int SIZE = 100;
+    constexpr size_t SIZE = 100;
 	char input_buff[SIZE]{};
  
     cout<<"Input message to coding: \n";
     cin>>input_buff;
 
-    int lenght = strlen(input_buff);
+    size_t lenght = strlen(input_buff);
  
-    for(int i = 0; i < lenght; ++i){
+    for(size_t i = 0; i < lenght; ++i){
         input_buff[i] += 3;
     }
 
     cout << "Coding message: \n";   
     cout << input_buff<<"\n";
     
-    cout<<"Decode: "<<endl;
+    cout<<"Decode: \n";
 
-    for(int i = 0; i < lenght; ++i){
+    for(size_t i = 0; i < lenght; ++i){
         input_buff[i] -= 3;
     }
         

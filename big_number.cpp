@@ -1,48 +1,26 @@
-#include <bits/stdc++.h>
-#include <cmath>
-#include <stdlib.h>   
+#include <iostream>
+#include <algorithm>
+#include <cstdlib>   
 
 using std::cout;
 using std::cin;
 using std::string;
 
-bool check_number(string str1, string str2) { 
-
-    unsigned lenght_1 = str1.length();
-    unsigned lenght_2 = str2.length(); 
-
-    
-    if (lenght_1 < lenght_2){
-        return true;
-    } 
-    if (lenght_2 < lenght_1){
-        return false;
-    }
-
-    for (uint32_t i = 0; i < lenght_1; i++){
-        if (str1[i] < str2[i]){
-            return true;
-        } else if (str1[i] > str2[i]){
-            return false; 
-        } 
-    } 
-    return false; 
-} 
    
-string findDiff(string str1, string str2) { 
+string findDiff(string &str1, string &str2) { 
     
-    if (check_number(str1, str2)){ 
+    if (str1.compare(str2) != 0){ 
         swap(str1, str2); 
     }
-    
+ 
     string str = "";   
-    uint32_t lenght_1 = str1.length();
-    uint32_t lenght_2 = str2.length(); 
+    size_t lenght_1 = str1.length();
+    size_t lenght_2 = str2.length(); 
   
     reverse(str1.begin(), str1.end()); 
     reverse(str2.begin(), str2.end()); 
       
-    uint32_t carry = 0; 
+    uint8_t carry = 0; 
   
     for (size_t i = 0; i < lenght_2; i++) { 
   
@@ -54,7 +32,7 @@ string findDiff(string str1, string str2) {
         } else {
             carry = 0;
         } 
-        str.push_back(sub + '0'); 
+        str += (sub + '0'); 
     } 
   
     
@@ -68,7 +46,7 @@ string findDiff(string str1, string str2) {
             carry = 0;
         } 
               
-        str.push_back(sub + '0'); 
+        str += (sub + '0'); 
     } 
   
     reverse(str.begin(), str.end()); 

@@ -1,127 +1,150 @@
-#include <cstring>
 #include <iostream>
+using std::cout;
 
 struct nodes {
-    char data[100];
+    int data;
     nodes* next;
 };
 
 
 class list {
-    public:
-        void insert(char* str);
-        void del_next();
-        void go_next();
-        void go_first();
-        const char* show();
-        int size();
-
-        list();
-        ~list();
-
     private:
         nodes* head;
-        nodes* position;
-        int count_element;
-        void free();
+        nodes* tail;
+    public:
+        void create_node(int value);
+        void insert_start(int value);
+        void insert_position(int pos, int value);
+        void delete_first();
+        void delete_last();
+        void delete_position(int pos);
+        void show_all_element();
+        list();
+
 };
 
 list::list(){
-    head = NULL;
-    count_element = 0;
-    go_first();
+    head = nullptr;
+    tail = nullptr;
 }
 
-list::~list(){
-    free();
-}
+void list::create_node(int value){
+    nodes *new_node = new nodes;
+    new_node ->data = value;
+    new_node ->next = nullptr;
 
-void list::insert(char* str){
-    nodes * new_node = new nodes;
-    strcpy(new_node->data,str);
-    if (position != NULL){
-        new_node -> next = position -> next;
-        position -> next = new_node;
+    if (tail == nullptr){
+        head = new_node;
+        tail = new_node;
     }else{
-        new_node -> next = new_node;
-        position = head = new_node;
-    }
-    count_element++;
-}
-
-void list::del_next(){
-    if(position != NULL){
-        nodes* tmp = position -> next;
-        position -> next = position -> next -> next;
-        if(tmp == head){
-            head = tmp -> next;
-        }
-        delete tmp;
-    }
-    count_element --;
-}
-
-void list::go_next(){
-    if(position != NULL){
-        position = position -> next;
+        tail ->next = new_node;
+        tail = new_node;
     }
 }
 
-void list::go_first(){
-    position = head;
+void list::insert_start(int value){
+    nodes *new_node = new nodes;
+    new_node ->data = value;
+    new_node ->next = head;
+    head = new_node;
+    
 }
 
-const char* list::show(){
-    if (position != NULL){
-        return position -> data;
-    }else{
-        return nullptr;
+void list::insert_position(int pos, int value){
+    nodes *previous = new nodes;
+    nodes *current = new nodes;
+    nodes *new_node = new nodes;
+    current = head;
+    for(size_t i = 1; i < pos; ++i){
+        previous = current;
+        current = current ->next;
     }
+    new_node ->data = value;
+    previous ->next = new_node;
+    new_node ->next = current;
 }
 
-int list::size(){
-    return count_element;
+void list::delete_first(){
+    nodes *new_node = new nodes;
+    new_node = head;
+    head = head ->next;
+    delete new_node;
 }
 
-void list::free(){
-    go_first();
-    while (head -> next != head){
-        del_next();
+void list::delete_last(){
+    nodes *current = new nodes;
+    nodes *previous = new nodes;
+    current = head;
+    while(current ->next != nullptr){
+        previous = current;
+        current = current ->next;
     }
-    del_next();   
+    tail = previous;
+    previous ->next = nullptr;
+    delete current;
+}
+
+void list::delete_position(int pos){
+    nodes *current = new nodes;
+    nodes *previous = new nodes;
+    current = head;
+    for(size_t i = 1; i < pos; ++i){
+        previous = current;
+        current = current ->next;
+    }
+    previous ->next = current ->next;
+}
+
+void list::show_all_element(){
+    nodes *new_node = new nodes;
+    new_node = head;
+    while (new_node != nullptr){
+        cout << new_node ->data <<"\t";
+        new_node = new_node ->next; 
+    }
+    
 }
 
 int main(){
-    char name1[] = "Dima";
-    char name2[] = "Petro";
-    char name3[] = "Gnaj";
-
-    list student_list;
-    
-    
-    student_list.insert(name1);
-    student_list.insert(name2);
-    student_list.insert(name3);
- 
-    
-    student_list.go_first();
-    for(int i = 1; i <= student_list.size(); i++){
-        std::cout << student_list.show() << std::endl;
-        student_list.go_next();
-    }
- 
-    
-    student_list.go_first();
-    student_list.go_next();
-    student_list.go_next();
-    student_list.del_next();
-    
-    
-    student_list.go_first();    
-    for(int i = 1; i<=student_list.size(); i++){
-        std::cout << student_list.show() << std::endl;
-        student_list.go_next();
-    }
+    list node;
+    node.create_node(5);
+    node.create_node(20);
+    node.create_node(10);
+    node.create_node(15);
+    cout <<"\n********************\n";
+    cout <<"Display all nodes";
+    cout <<"\n********************\n";
+    node.show_all_element();
+    cout <<"\n********************\n";
+    cout <<"Insert to end";
+    cout <<"\n********************\n";
+    node.create_node(12);
+    node.show_all_element();
+    cout <<"\n********************\n";
+    cout <<"Insert to start";
+    cout <<"\n********************\n";
+    node.insert_start(13);
+    node.show_all_element();
+    cout <<"\n********************\n";
+    cout <<"Insert to manual position:";
+    cout <<"\n********************\n";
+    node.insert_position(3,45);
+    node.show_all_element();
+    cout <<"\n********************\n";
+    cout <<"Delete to end";
+    cout <<"\n********************\n";
+    node.delete_last();
+    node.show_all_element();
+    cout <<"\n********************\n";
+    cout <<"Delete to start";
+    cout <<"\n********************\n";
+    node.delete_first();
+    node.show_all_element();
+    cout <<"\n********************\n";
+    cout <<"Delete to position";
+    cout <<"\n********************\n";
+    node.delete_position(2);
+    node.show_all_element();
     
     return 0;
 }
