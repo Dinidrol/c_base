@@ -112,6 +112,7 @@ void bits_summ(){
 void happy_ticket(){
 tryAgain:
     unsigned ticket_number = 0;
+    unsigned check_ticket_number = 0;
     unsigned high_bit = 0;
     unsigned low_bit = 0;
 
@@ -126,12 +127,14 @@ tryAgain:
         cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
     }
 
-    while((ticket_number/=10) > 0){
+    check_ticket_number = ticket_number;
+
+    while((check_ticket_number/=10) > 0){
     	++count_sign;
     }
 
     if(count_sign > 6){
-    	cout << "Sign number more 6 digit!"
+    	cout << "Sign number more 6 digit!";
     	goto tryAgain;
     }
 
@@ -180,8 +183,8 @@ void odd_summ(){
 
     for (size_t i = 0; i < N; i++){
         cin >> input_number;  
-        if (mas%2 != 0){
-            sum+=number;
+        if (input_number%2 != 0){
+            sum+=input_number;
         }
     }
     
