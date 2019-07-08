@@ -10,7 +10,7 @@ class Shape {
             cout <<"Function to draw shape in CLI\n";
         }
 
-        virtual void calc_square(int a){
+        virtual void calc_square(unsigned radius_shape){
            cout <<"Function to calc shape in CLI\n";
         }
 };
@@ -25,7 +25,7 @@ class Quadrate: public Shape {
              }
         }
 
-        void calc_square(unsigned side_a){
+        void calc_square(unsigned side_a) override{
             a = side_a;
             square_quadrate = side_a * side_a;
             cout << "Square quadrate: " << square_quadrate <<"\n";
@@ -53,7 +53,7 @@ class Circle: public Shape {
             cout << "\n";
         }
 
-        void calc_square(unsigned radius_shape){
+        void calc_square(unsigned radius_shape) override{
             radius = radius_shape;
             square_shape = M_PI * pow(radius_shape, 2);
             cout <<"Squre shape: "<<square_shape <<"\n";
@@ -96,18 +96,19 @@ int main(){
     shape->calc_square(6);
     shape->draw();
 
-
-    /* 
     Quadrate q;
     q.calc_square(5);
     q.draw();
+    shape = &q;
+    shape->calc_square(7);
+    shape->draw(); 
+
 
     Rectangle r;
     r.calc_square(4,8);
     r.draw();
-*/
-
-
+    shape = &r;
+    shape->calc_square(5,7);
 
     return 0;
 }

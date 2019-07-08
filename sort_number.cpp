@@ -44,8 +44,8 @@ void swap(Type &a, Type &b){
 }
 
 
-template <class Type, size_t N>
-void sort_buble(Type (&arr)[N], Type compare){
+template <class Type, size_t N, typename Func>
+void sort_buble(Type (&arr)[N], Func compare){
     for(size_t i = 0; i < N; ++i){
         for(size_t j = N-1; j > i; --j){
             if(compare(arr[j-1], arr[j])){
@@ -75,7 +75,7 @@ int main (){
             random_arr_number(arr_int);
             cout << "Dont sort arr: \n";
             show_arr(arr_int);
-            sort_buble(arr_int, [](unsigned int a, unsigned int b)-> bool{ return a > b;});
+            sort_buble(arr_int, [](unsigned int a, unsigned int b){ return a > b;});
             cout << "Sort arr: \n";
             show_arr(arr_int);
             break;
@@ -83,7 +83,7 @@ int main (){
             random_arr_number(arr_double);
             cout << "Dont sort arr: \n";
             show_arr(arr_double);
-            //sort_buble(arr_double);
+            sort_buble(arr_double, [](double a, double b){ return a > b;});
             cout << "Sort arr: \n";
             show_arr(arr_double);
             break;
@@ -91,7 +91,7 @@ int main (){
             random_arr_number(arr_char);
             cout << "Dont sort arr: \n";
             show_arr(arr_char);
-            //sort_buble(arr_char);
+            sort_buble(arr_char, [](char a, char b){ return a > b;});
             cout << "Sort arr: \n";
             show_arr(arr_char);
             break;
